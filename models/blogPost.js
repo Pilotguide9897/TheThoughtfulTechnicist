@@ -38,7 +38,7 @@ BlogPost.init(
     sequelize,
     freezeTableName: true, //When this property is set to true, Sequelize will use the model name as the table name in the database without modifying it. In this case, since the modelName is 'blogPost', Sequelize will use 'gallery' as the table name instead of the default pluralized form, 'blogPosts'.
     underscored: true, //When this property is set to true, Sequelize will use snake_case (underscores) instead of camelCase for auto-generated column names and foreign key constraints. e.g., if you have a column called createdAt, Sequelize would create it as created_at in the database when underscored is set to true.
-    modelName: "blogPosts",
+    modelName: "BlogPosts",
   }
 );
 
