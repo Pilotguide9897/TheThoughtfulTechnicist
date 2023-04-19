@@ -8,9 +8,19 @@ const sequelize = require("./config/connection");
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+// Set up sessions. Sessions are a way to store data on the server specific to each user across multiple requests. They are used to maintain state in a stateless protocol like http.
+const sess = {
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+};
+
+app.use(session(sess)); //Adds the session middleware to the express app. Uses req.session
+
+
 // Configure handlebars:
 // create an instance of express-handlebars with default configuration and set it as the view engine for the express app.
-const hbs = exphbs.create({}); // creates a new instance of the Handlebars engine using the exphbs.create() method. The empty object passed as an argument can be used to configure options for the Handlebars engine, such as the location of the views directory or the default layout to use.
+const hbs = exphbs.create({ helpers }); // creates a new instance of the Handlebars engine using the exphbs.create() method. The empty object passed as an argument can be used to configure options for the Handlebars engine, such as the location of the views directory or the default layout to use.
 app.engine('handlebars', hbs.engine) // Registers the Handlebars engine with the app Express.js application. The first argument is the file extension to use for views that are rendered with this engine (in this case, .handlebars). The second argument is the actual engine instance created in the previous line.
 app.set('view engine', 'handlebars'); // This sets the default view engine for the app Express.js application to be the Handlebars engine. This means that when you use res.render() to render a view in your application, Express.js will automatically look for a file with the .handlebars extension and use the Handlebars engine to render it.
 
